@@ -1,4 +1,4 @@
-// meta={"simUrl":"https://trg-arcade.userpxt.io/v1.12.18/---simulator","cdnUrl":"https://pxt.azureedge.net","version":"0.0.1","target":"arcade","targetVersion":"1.12.18","repo":"jokobaba/game02"}
+// meta={"simUrl":"https://trg-arcade.userpxt.io/v1.12.18/---simulator","cdnUrl":"https://pxt.azureedge.net","version":"0.0.2","target":"arcade","targetVersion":"1.12.18","repo":"jokobaba/game02"}
 // total=1775907 new=6.04% cached=88.92% other=5.04%
 (function (ectx) {
 'use strict';
@@ -536,7 +536,7 @@ const pxsim_pxtrt = pxsim.pxtrt;
 const pxsim_numops = pxsim.numops;
 
 
-function _main___P128944(s) {
+function _main___P129174(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -1059,13 +1059,13 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-_main___P128944.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
-_main___P128944.continuations = [  ]
+_main___P129174.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
+_main___P129174.continuations = [  ]
 
-function _main___P128944_mk(s) {
+function _main___P129174_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: _main___P128944, depth: s.depth + 1,
+        parent: s, fn: _main___P129174, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -59374,5 +59374,5 @@ const sprites_BaseSpriteSayRenderer__C108185_VT = mkVTable({
 
 const breakpoints = setupDebugger(1, ["projectile___110256","mySprite___110257","mySprite2___110255"])
 
-return _main___P128944
+return _main___P129174
 })
