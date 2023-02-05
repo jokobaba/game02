@@ -1,3 +1,38 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . 2 1 1 2 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, mySprite, 0, -100)
+    music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite)
+    otherSprite.startEffect(effects.ashes)
+    info.changeScoreBy(1)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite)
+    music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.InBackground)
+    info.changeLifeBy(-1)
+    scene.cameraShake(4, 500)
+})
+let mySprite2: Sprite = null
+let projectile: Sprite = null
+let mySprite: Sprite = null
 info.setScore(0)
 info.setLife(3)
 scene.setBackgroundImage(img`
@@ -122,7 +157,7 @@ scene.setBackgroundImage(img`
     3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
     3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
     `)
-let mySprite = sprites.create(img`
+mySprite = sprites.create(img`
     . . . . . . . c d . . . . . . . 
     . . . . . . . c d . . . . . . . 
     . . . . . . . c d . . . . . . . 
@@ -140,5 +175,31 @@ let mySprite = sprites.create(img`
     8 8 8 8 8 8 8 8 6 6 6 9 6 6 8 8 
     8 8 8 8 8 8 8 8 6 6 6 6 9 6 8 8 
     `, SpriteKind.Player)
+mySprite.setStayInScreen(true)
 mySprite.setPosition(80, 110)
 controller.moveSprite(mySprite, 100, 0)
+forever(function () {
+    mySprite2.setVelocity(0, 50)
+})
+game.onUpdateInterval(randint(300, 500), function () {
+    mySprite2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . c c c c . . 
+        . c c c c c . c c c c c f c c . 
+        c c a c c c c c 8 f f c f f c c 
+        c a f a a c c a f f c a a f f c 
+        c a 8 f a a c a c c c a a a a c 
+        c b c f a a a a a c c c c c c c 
+        c b b a a c f 8 a c c c 8 c c c 
+        . c b b a b c f a a a 8 8 c c . 
+        . . . . a a b b b a a 8 a c . . 
+        . . . . c b c a a c c b . . . . 
+        . . . . b b c c a b b a . . . . 
+        . . . . b b a b a 6 a . . . . . 
+        . . . . c b b b 6 6 c . . . . . 
+        . . . . . c a 6 6 b c . . . . . 
+        . . . . . . . c c c . . . . . . 
+        `, SpriteKind.Enemy)
+    mySprite2.setFlag(SpriteFlag.DestroyOnWall, true)
+    mySprite2.setPosition(randint(0, 160), 0)
+})
